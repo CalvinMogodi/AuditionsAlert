@@ -1,0 +1,108 @@
+<!--
+  Generated template for the DashboardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar transparent style="text-align: center;background-color: #050704;">
+        <button style="color: #489018;" ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <h4 style="color: #ffffff">Auditions Alert</h4>
+        <ion-buttons end>
+            <button ion-button style="color: #489018;font-size: 25px;" (click)="openUpload()">
+                <ion-icon style="font-weight: bolder;" name="add"></ion-icon>
+            </button>
+            <button ion-button style="color: #489018;font-size: 25px;" (click)="goToChat()">
+                <ion-icon style="font-weight: bolder;" name="chatbubbles"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div class="progress-outer" *ngIf="loading">
+        <div class="progress-inner" [style.width]="loadProgress + '%'">
+        </div>
+    </div>   
+
+    <ion-slides *ngIf="!noRecordFound && !loading">
+        <ion-slide *ngFor="let audition of auditions" style="overflow-y: auto;">
+            <div class="slide">
+                <div style="margin-top: 375px;">
+                    <img src="{{audition.auditionImage}}" imageViewer>
+                </div>
+                <div style="padding: 10px;">
+                    <span
+                        style="color: #ffffff;font-size: 14px;font-weight: 400;float: left;">{{audition.date}}</span>
+                    <p style="text-align: justify;float: left;color: #ffffff;font-size: 12px;">
+                        {{audition.auditionDescription}}
+                    </p>
+                    <div>
+                        <div style="text-align: left;">
+                            <span style="color: #fff;font-size: 14px;">{{commentCount}} Comments </span> <span style="float: right;">
+                            </span>
+                        </div>
+                    </div>
+                    <hr style="background-color: gray;">                   
+                    <ion-list>
+                        <ion-item no-lines>  
+                            <ion-note item-end style="height: fit-content;margin-top: 20px;">
+                                <button ion-button block class="btn-add" (click)="addComment(audition)">
+                                    Add
+                                  </button>
+                            </ion-note>                          
+                            <ion-label floating>Comment</ion-label>
+                            <ion-textarea type="text" (focusout)="showCommentBtn = false" (focus)="showCommentBtn = true" style="border-bottom: #ffffff 1px solid;padding-bottom: px;" [(ngModel)]="newComment">
+                            </ion-textarea>
+                        </ion-item>
+                        <ion-item *ngFor="let comment of comments" no-lines text-wrap>
+                            <ion-avatar item-start>
+                                <img src=".../../../../assets/imgs/avatar.svg">
+                             </ion-avatar>                        
+                            <ion-label>
+                                <h2>{{comment.user}}</h2>
+                                <p style="color: darkgray;">{{comment.comment}}</p>
+                            </ion-label>
+                        </ion-item>
+                        <ion-item no-lines>
+                          </ion-item>
+                    </ion-list>
+                </div>
+            </div>
+        </ion-slide>
+    </ion-slides>
+    <div *ngIf="noRecordFound" style="color: gray;text-align: center;font-size: large;margin-top: 70%;">
+        <p>No record(s) found.</p>
+    </div>
+</ion-content>
+
+<ion-footer style="background-color: #050704;">
+    <ion-grid>
+        <ion-row style="color: #489018;">
+          <ion-col style="border-right:#489018 2px solid; text-align: center;">
+            <ion-icon class="ion" name="videocam"></ion-icon>
+            <br><label class="ion-text">Apply</label>  
+          </ion-col>
+          <ion-col style="border-right:#489018 2px solid; text-align: center;">
+            <ion-icon (click)="editAudition(selectedAudition)" class="ion" *ngIf="selectedAudition.isMine" name="create"></ion-icon>  
+                <br><label class="ion-text">Edit</label>          
+          </ion-col>          
+          <ion-col style="border-right:#489018 2px solid; text-align: center;" *ngIf="userType == 'admin'">
+            <ion-icon class="ion" (click)="deleteAuditions(audition)" name="trash"></ion-icon>
+            <br><label class="ion-text">Delete</label>
+          </ion-col>
+          <ion-col style="border-right:#489018 2px solid; text-align: center;">
+            <ion-icon class="ion" name="alarm" (click)="picker.open()">
+                <ion-datetime hidden #picker pickerFormat="DD MMMM YYYY h:MM" [min]="datePickerMin" [(ngModel)]="datePicker" (ionChange)="setReminder(selectedAudition)"></ion-datetime>                
+            </ion-icon>
+            <br><label class="ion-text">Set Reminder</label>
+          </ion-col>
+          <ion-col style="text-align: center;">
+            <ion-icon class="ion" name="share" (click)="presentActionSheet(selectedAudition)"></ion-icon>
+            <br><label class="ion-text">Share</label>
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

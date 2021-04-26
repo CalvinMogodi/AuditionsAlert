@@ -1,0 +1,31 @@
+page-welcome {
+.first-slide {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/auditionsalert-3a1b8.appspot.com/o/wellcome%2Fimg1.png?alt=media&token=f684cb56-85c9-4e1f-ae2e-51ee110d852a'); 
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat
+}
+
+.second-slide {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/auditionsalert-3a1b8.appspot.com/o/wellcome%2Fimg2.png?alt=media&token=1f64902f-75a8-4a60-9081-37e42b026fc4'); 
+  background-position: center;
+  background-size: cover;  
+  background-repeat: no-repeat
+}
+
+.third-slide {  
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/auditionsalert-3a1b8.appspot.com/o/wellcome%2Fimg3.png?alt=media&token=2b9737d4-f54a-44bb-b523-cefd37f04a6f'); 
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat
+}
+
+.slide-text{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    color:#FFFFFF; 
+    font-size: 45px
+}
+}   

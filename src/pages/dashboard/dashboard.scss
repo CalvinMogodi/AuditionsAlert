@@ -1,0 +1,75 @@
+
+page-dashboard {
+    ion-content {
+        background-position: center;
+        background-size: cover;
+    }
+
+    scroll-content {
+        overflow-y: auto !important;
+    }
+    .delete-btn{
+        margin-bottom: -1px;
+        height: 20px;
+        color: #fff;
+        background-color: red;
+    }
+    .update-btn{
+        margin-bottom: -1px;
+        height: 20px;
+        color: #fff;
+    }
+    
+    .progress-outer {
+        width: 100%;
+        margin: -7px 0%;
+        color: #fff;
+        border-radius: 20px;
+      }
+    
+    .progress-inner {
+        min-width: 15%;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 5px;
+        background-color: map-get($colors, primary);
+    }
+    .left{
+        float: left;
+    }
+
+    .ion-text{
+        color: gray;
+        font-size: 12px;
+    }
+
+    .ion{
+        color: #489018;
+        font-size: 24px;
+    }
+
+    .ion-logo-whatsapp{
+        color: green !important;
+    }
+
+    .ion-logo-facebook{
+        color: blue !important;
+    }
+
+    .ion-logo-instagram{
+        color: green !important;
+    }
+    .scroll-content{
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .btn-add{
+        color: #fff;
+        background-color: #489018;
+        border: #fff 1px solid;
+        width: 45px;
+    }
+    
+}
+

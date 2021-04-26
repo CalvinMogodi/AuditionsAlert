@@ -1,0 +1,13 @@
+{
+  "name": "Auditions Alert",
+  "short_name": "Auditions Alert",
+  "start_url": "index.html",
+  "display": "standalone",
+  "icons": [{
+    "src": "assets/imgs/logo.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "background_color": "#006400",
+  "theme_color": "#006400"
+}

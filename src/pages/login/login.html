@@ -1,0 +1,49 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content padding>
+    <form [formGroup]="loginForm">
+        <ion-fab bottom right edge style="bottom: 10px !important;" (click)="register()">
+            <button ion-fab mini style="background-color: #32db64;">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-fab>
+        <div style="text-align: center;margin-top: 50%;">
+            <img src="../../assets/imgs/logo.png" style="height: 100px;"><br><br>
+            <ion-list style="margin-top: -25px;" transparent no-lines>
+                <ion-item style="background: transparent !important">
+                    <ion-label style="color: #fff" floating>Email</ion-label>
+                    <ion-input style="border-bottom: gray 1px solid;padding-bottom: 10px;"
+                        [(ngModel)]="user.emailAddress" formControlName="emailAddress"></ion-input>
+                </ion-item>
+                <ion-item style="background: transparent !important">
+                    <ion-label style="color: #fff" floating>Password</ion-label>
+                    <ion-input type="password" style="border-bottom: gray 1px solid;padding-bottom: 10px;"
+                        [(ngModel)]="user.password" formControlName="password"></ion-input>
+                </ion-item>
+            </ion-list>
+            <div padding>
+                <button ion-button block style="color: #fff;background-color: transparent;border: #fff 1px solid;"
+                    (click)="login(user)">Sign In</button>
+                <p *ngIf="showError" style="color: red;font-size: small;text-align:center"> invalid email or password.
+                </p>
+            </div>
+            <ion-row style="margin-top: -20px;">
+                <ion-col>
+                    <!--<button style="color:white !important" (click)="register()" ion-button icon-left clear small class="login-links">
+        <div>Register</div>
+      </button>-->
+                </ion-col>
+                <ion-col>
+                    <button style="color:white !important" ion-button icon-left clear small class="login-links"
+                        (click)="forgotPassword()">
+                        <div>Forgot Password?</div>
+                    </button>
+                </ion-col>
+            </ion-row>
+        </div>
+    </form>
+</ion-content>
