@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, ActionSheetController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, ActionSheetController, AlertController } from 'ionic-angular';
 import { UploadeventPage } from '../uploadevent/uploadevent';
 import { AuditionProvider } from '../../providers/audition/audition';
 import { AuditiondetailPage } from '../auditiondetail/auditiondetail';
@@ -40,10 +40,11 @@ export class DashboardPage {
   public newComment: string = undefined;
   public comments: any[] = [];
   public datePicker: Date = new Date();
-  public selectedAudition: any = {isMine: false};
+  public selectedAudition: any = { isMine: false };
   public commentCount: number = 0;
+  public popover: any;
 
-  constructor(public admob: AdMobPro, private fcm: FCM, public actionSheetController: ActionSheetController, public db: AngularFireDatabase, private socialSharing: SocialSharing
+  constructor(public alertController: AlertController, public admob: AdMobPro, private fcm: FCM, public actionSheetController: ActionSheetController, public db: AngularFireDatabase, private socialSharing: SocialSharing
     , public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public storage: Storage, public auditionProvider: AuditionProvider, public toastCtrl: ToastController, private globalVariables: GlobalVariablesProvider) {
     //get audition events
     this.admob.onAdDismiss().subscribe(() => { });
@@ -288,14 +289,10 @@ export class DashboardPage {
     await actionSheet.present();
   }
 
-  share(audition){
-    this.socialSharing.share('Auditions Alert',null,audition.auditionImage,audition.auditionUrl);
-  }
-
   shareViaFacebook(audition) {
-    return this.socialSharing.shareViaFacebook('Auditions Alert', null, audition.auditionUrl).then( isShared => {
+    return this.socialSharing.shareViaFacebook('Auditions Alert', audition.auditionImage, audition.auditionUrl).then(isShared => {
       return isShared;
-    }).catch(error  => {
+    }).catch(error => {
       //let _error = error;
       return null;
     });
@@ -303,9 +300,9 @@ export class DashboardPage {
 
   shareViaInstagram(audition) {
     // Share via email
-    this.socialSharing.shareViaInstagram('Auditions Alert', null).then(isShared => {
+    this.socialSharing.shareViaInstagram('Auditions Alert', audition.auditionImage).then(isShared => {
       return isShared;
-    }).catch(error  => {
+    }).catch(error => {
       //let _error = error;
       return null;
     });
@@ -313,11 +310,36 @@ export class DashboardPage {
 
   shareViaWhatsApp(audition) {
     // Share via email
-    this.socialSharing.shareViaWhatsApp('Auditions Alert', null, audition.auditionUrl).then(isShared => {
+    this.socialSharing.shareViaWhatsApp('Auditions Alert', audition.auditionImage, audition.auditionUrl).then(isShared => {
       return isShared;
-    }).catch(error  => {
+    }).catch(error => {
       //let _error = error;
       return null;
     });
   }
+
+  presentPopover() {
+    const alert = this.alertController.create({
+      title: 'Apply for this auidtion',
+      message: 'Are you sure you want to apply for this audition?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'popover',
+          handler: (blah) => {
+            alert.dismiss();
+          }
+        }, {
+          text: 'Apply',
+          handler: () => {
+            alert.dismiss();
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
+
 }

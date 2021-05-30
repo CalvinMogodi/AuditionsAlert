@@ -28,9 +28,9 @@
     </div>   
 
     <ion-slides *ngIf="!noRecordFound && !loading">
-        <ion-slide *ngFor="let audition of auditions" style="overflow-y: auto;">
+        <ion-slide *ngFor="let audition of auditions" style="overflow-y: auto;width: fit-content;">
             <div class="slide">
-                <div style="margin-top: 375px;">
+                <div style="margin-top: 590px;height: 540px;width: fit-content;">
                     <img src="{{audition.auditionImage}}" imageViewer>
                 </div>
                 <div style="padding: 10px;">
@@ -82,7 +82,7 @@
     <ion-grid>
         <ion-row style="color: #489018;">
           <ion-col style="border-right:#489018 2px solid; text-align: center;">
-            <ion-icon class="ion" name="videocam"></ion-icon>
+            <ion-icon (click)="presentPopover()" class="ion" name="videocam"></ion-icon>
             <br><label class="ion-text">Apply</label>  
           </ion-col>
           <ion-col style="border-right:#489018 2px solid; text-align: center;">
